@@ -1,0 +1,68 @@
+Overview  
+This project builds a machine learning model to improve Zomato’s delivery time predictions (ETAs) using real-world operational data. The goal was to reduce delayed orders and convert improved ETA accuracy into measurable business value.  
+
+Key Outcomes:  
+- Improved ETA accuracy by 12% (MAE ↓ from 5.7 → 5.0 mins) using Random Forest.  
+- Achieved R² = 0.53 through K-Fold Cross Validation.  
+- Simulated $7.8M annual revenue uplift from reduced order delays (validated via bootstrapped CI).  
+
+Business Problem  
+Inaccurate ETAs frustrate users, increase cancellations, and lower retention.  
+Objective: Predict delivery times more accurately to minimize late deliveries and improve customer experience, ultimately driving higher order frequency and revenue.  
+
+Data & Features  
+Dataset: [Zomato Delivery Operations Analytics (Kaggle)](https://www.kaggle.com/datasets/saurabhbadole/zomato-delivery-operations-analytics-dataset)  
+Size: 45,000+ orders, 20 variables  
+
+Feature Engineering Highlights:
+- Spatial: `distance_km` (Haversine formula)  
+- Temporal: `day_of_week`, `hour_of_day`, `is_weekend`, cyclical time encoding  
+- Operational: `road_traffic_density`, `weather_conditions`, `multiple_deliveries`  
+- Custom: `is_delayed` flag — orders delayed >10.2 mins beyond predicted ETA  
+
+Modeling  
+Algorithms:  
+- Linear Regression (Baseline)  
+- Random Forest Regressor (500 trees)  
+
+Evaluation Metrics: MAE (primary), RMSE, R²  
+
+| Model | MAE ↓ | RMSE ↓ | R² ↑ |  
+|-------|--------|--------|------|  
+| Linear Regression | 5.70 | 7.14 | 0.42 |  
+| Random Forest | 5.00 | 6.39 | 0.53 |  
+
+Business Simulation:
+- Delay rate reduced from **7.07% → 2.82%**  
+- Revenue uplift: $0.017 per order ≈ $7.8M annually  
+- 95% CI validated through bootstrapping  
+
+Business Impact  
+Improving ETA accuracy drives measurable ROI:  
+- Fewer delayed orders → improved customer satisfaction & retention  
+- Translating model improvement into order frequency uplift
+- Proposed A/B testing and biweekly retraining for production deployment  
+
+Tech Stack  
+Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
+
+My Role  
+Led the Delay & Business Impact Analysis:  
+- Engineered the `is_delayed` metric  
+- Quantified behavioral impact on customer order frequency  
+- Calculated financial uplift using regression and bootstrapped confidence intervals  
+
+Key Learnings  
+- Translating ML metrics into business KPIs (MAE → revenue).  
+- Handling real-world, messy operational data.  
+- Bridging technical modeling with strategic business insights.  
+
+Next Steps  
+- Expand to multi-city data for scalability.  
+- Add real-time A/B testing simulation.  
+- Deploy via API endpoint for live ETA predictions.  
+
+Timeline  
+Completed: Oct 2025  
+Duration: 10 days  
+Institution: Duke University  
